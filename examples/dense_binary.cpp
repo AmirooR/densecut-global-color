@@ -69,18 +69,18 @@ unsigned char* colorize_error( const short* map, const unsigned char* gt, int W,
         const unsigned char* this_gt = gt+3*k;
 		if( map[k]*255 == this_gt[0])
         {
-            this_r[0] = this_r[1] = this_r[2] = (unsigned char)map[k]*255;
+            this_r[0] = this_r[1] = this_r[2] = 0;//(unsigned char)map[k]*255;
         }
         else
         {
             if(this_gt[0] == 255)
             {
-                this_r[0] = this_r[2] = 0;
+                //this_r[1] = this_r[0] = 0;
                 this_r[1] = 255;
             }
             else
             {
-                this_r[2] = this_r[1] = 0;
+                //this_r[2] = this_r[1] = 0;
                 this_r[0] = 255;
             }
 
@@ -156,7 +156,7 @@ float * classify( const unsigned char * im, int W, int H, int M ){
 
 int main( int argc, char* argv[]){
 	if (argc<3){
-		printf("Usage: %s image output\n\t%s image output noised-input", argv[0], argv[0] );
+		printf("Usage: %s image output\n\t%s image output noised-input\n", argv[0], argv[0] );
 		return 1;
 	}
 	// Number of labels
@@ -200,7 +200,7 @@ int main( int argc, char* argv[]){
 	// x_stddev = 3
 	// y_stddev = 3
 	// weight = 3
-	crf.addPairwiseGaussian( 7, 7, 300 );
+	crf.addPairwiseGaussian( 7, 7, 400 );
 	// add a color dependent term (feature = xyrgb)
 	// x_stddev = 60
 	// y_stddev = 60
